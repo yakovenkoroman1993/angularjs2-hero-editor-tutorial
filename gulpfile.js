@@ -64,6 +64,9 @@ gulp.task('angular_libs_rxjs', function () {
         .pipe(gulp.dest(config.publicDir + '/scripts/angular/libs/rxjs'))
 });
 
+gulp.task('watch', function() {
+    gulp.watch(config.appDir + '/**/*.*', ['angular_scripts']);
+});
 
 gulp.task('default', [
     'vendor_scripts',
