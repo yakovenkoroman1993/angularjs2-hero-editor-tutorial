@@ -1,1 +1,1 @@
-"# angularjs2-hero-editor-tutorial" 
+# angularjs2-hero-editor-tutorial
