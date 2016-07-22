@@ -1,0 +1,12 @@
+{
+    "name": "roman/angularjs-php",
+    "authors": [
+        {
+            "name": "Roman Yakovenko",
+            "email": "feurjarx@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "~1.0"
+    }
+}

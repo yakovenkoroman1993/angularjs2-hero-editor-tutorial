@@ -1,0 +1,91 @@
+{% set vendor_styles = [
+    
+] %}
+
+{% set vendor_scripts = [
+    
+] %}
+
+
+{% set custom_styles = [
+    
+] %}
+
+{% set custom_scripts = [
+    
+] %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>{% block title %}Home{% endblock %}</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{{ url('favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
+
+    <!--  vendor styles  -->
+    {% for file in vendor_styles %}
+
+        <link href="{{ url('css/vendor/' ~ file) }}" rel="stylesheet">
+
+    {% endfor %}
+
+    {% block vendor_styles %}{% endblock %}
+
+
+    <!--  custom styles  -->
+    {% for file in custom_styles %}
+
+        <link href="{{ url('css/' ~ file) }}" rel="stylesheet">
+
+    {% endfor %}
+
+    {% block custom_styles %}{% endblock %}
+
+
+    <!-- 1. Load libraries -->
+    <script src="/scripts/vendor/shim.min.js"></script>
+    <script src="/scripts/vendor/zone.js"></script>
+    <script src="/scripts/vendor/Reflect.js"></script>
+    <script src="/scripts/vendor/system.src.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+
+    <!--  vendor scripts  -->
+    {% for file in vendor_scripts %}
+
+        <script src="{{ url('scripts/vendor/' ~ file) }}"></script>
+
+    {% endfor %}
+
+    {% block vendor_scripts %}{% endblock %}
+
+
+    <!--  custom scripts (before) -->
+    {% for file in custom_scripts %}
+
+        <script src="{{ url('scripts/' ~ file) }}"></script>
+
+    {% endfor %}
+
+    {% block before_custom_scripts %}{% endblock %}
+
+</head>
+
+<body>
+
+    {% block content %}{% endblock %}
+
+    <!--  custom scripts (after) -->
+    {% block after_custom_scripts %}{% endblock %}
+
+</body>
+</html>

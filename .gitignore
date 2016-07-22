@@ -1,0 +1,8 @@
+cmd._
+public/*
+node_modules/*
+bower_components/*
+vendor/*
+typings/*
+cache/*
+composer.lock
