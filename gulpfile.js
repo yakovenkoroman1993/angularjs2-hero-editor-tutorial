@@ -1,77 +1,75 @@
 /**
  * Created by Roman on 04.06.2016.
  */
-var gulp = require('gulp')
-;
+var gulp = require('gulp'),
+    fs = require('fs');
 
-var config = {
-    bowerDir: 'bower_components',
-    npmDir: 'node_modules',
-    publicDir: 'public',
-    assetsDir: 'assets',
-    appDir: 'app'
+var pathes = {
+    app: 'app',
+    npm: 'node_modules',
+    gulp_parts: './nodejs/gulpfile_parts',
+
+    public_scheme: {
+        root: 'public',
+
+        get angular() {
+            return this.root + '/angularjs2'
+        },
+
+        get angular_templates() {
+            return this.angular + '/templates'
+        },
+
+        get angular_styles() {
+            return this.angular + '/styles'
+        },
+
+        get vendor_js() {
+            return this.root + '/scripts/vendor'
+        },
+
+        get vendor_css() {
+            return this.root + '/styles/vendor'
+        }
+    }
 };
 
+var defaultTasks = ['watch'],
+    watchTasksMap = {},
+    gulpPart;
 
-gulp.task('vendor_scripts', function () {
-    return gulp.src([
+fs.readdirSync(pathes.gulp_parts).forEach(function (file) {
 
-        config.npmDir + '/core-js/client/shim.min.js',
-        config.npmDir + '/zone.js/dist/zone.js',
-        config.npmDir + '/reflect-metadata/Reflect.js',
-        config.npmDir + '/systemjs/dist/system.src.js'
+    gulpPart = require(pathes.gulp_parts + '/' + file);
 
-    ])
-        .pipe(gulp.dest(config.publicDir + '/scripts/vendor'))
-});
+    defaultTasks = defaultTasks.concat(gulpPart.init(gulp, pathes).map(function (task) {
 
-gulp.task('angular_scripts', function () {
-    return gulp.src([
+        if (task.watch && task.watch.length) {
 
-        config.appDir + '/app.component.js',
-        config.appDir + '/main.js'
+            task.watch.forEach(function (path) {
 
-    ])
-        .pipe(gulp.dest(config.publicDir + '/scripts/angular'))
-});
+                if (!watchTasksMap[path]) {
 
+                    watchTasksMap[path] = [];
+                }
 
-gulp.task('angular_libs_@angular', function () {
-    return gulp.src([
+                watchTasksMap[path].push(task.name);
+            });
+        }
 
-        config.npmDir + '/@angular/**/*.js'
-
-    ])
-        .pipe(gulp.dest(config.publicDir + '/scripts/angular/libs/@angular'))
-});
-
-gulp.task('angular_libs_angular_memory_api', function () {
-    return gulp.src([
-
-        config.npmDir + '/angular2-in-memory-web-api/**/*.js'
-
-    ])
-        .pipe(gulp.dest(config.publicDir + '/scripts/angular/libs/angular2-in-memory-web-api'))
-});
-
-
-gulp.task('angular_libs_rxjs', function () {
-    return gulp.src([
-
-        config.npmDir + '/rxjs/**/*.js'
-
-    ])
-        .pipe(gulp.dest(config.publicDir + '/scripts/angular/libs/rxjs'))
+        return task.name
+    }));
 });
 
 gulp.task('watch', function() {
-    gulp.watch(config.appDir + '/**/*.*', ['angular_scripts']);
+
+    for (var path in watchTasksMap) {
+
+        if (watchTasksMap.hasOwnProperty(path)) {
+
+            gulp.watch(path, watchTasksMap[path]);
+        }
+    }
 });
 
-gulp.task('default', [
-    'vendor_scripts',
-    'angular_scripts',
-    'angular_libs_@angular',
-    'angular_libs_angular_memory_api',
-    'angular_libs_rxjs'
-]);
+gulp.task('default', defaultTasks);

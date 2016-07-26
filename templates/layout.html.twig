@@ -1,9 +1,13 @@
 {% set vendor_styles = [
-    
+    'tether.min.css',
+    'bootstrap.min.css',
+    'font-awesome.min.css'
 ] %}
 
 {% set vendor_scripts = [
-    
+    'jquery.min.js',
+    'tether.min.js',
+    'bootstrap.min.js'
 ] %}
 
 
@@ -30,7 +34,7 @@
     <!--  vendor styles  -->
     {% for file in vendor_styles %}
 
-        <link href="{{ url('css/vendor/' ~ file) }}" rel="stylesheet">
+        <link href="{{ url('styles/vendor/' ~ file) }}" rel="stylesheet">
 
     {% endfor %}
 
@@ -46,18 +50,6 @@
 
     {% block custom_styles %}{% endblock %}
 
-
-    <!-- 1. Load libraries -->
-    <script src="/scripts/vendor/shim.min.js"></script>
-    <script src="/scripts/vendor/zone.js"></script>
-    <script src="/scripts/vendor/Reflect.js"></script>
-    <script src="/scripts/vendor/system.src.js"></script>
-
-    <!-- 2. Configure SystemJS -->
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('app').catch(function(err){ console.error(err); });
-    </script>
 
     <!--  vendor scripts  -->
     {% for file in vendor_scripts %}

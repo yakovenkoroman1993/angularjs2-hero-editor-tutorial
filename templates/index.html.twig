@@ -2,8 +2,27 @@
 
 {% block title %}Angularjs 2{% endblock %}
 
+{% block vendor_scripts %}
+	{{ parent() }}
+
+	<!-- 1. Load libraries -->
+	<script src="{{ url('angularjs2/libs/shim.min.js') }}"></script>
+	<script src="{{ url('angularjs2/libs/zone.js') }}"></script>
+	<script src="{{ url('angularjs2/libs/Reflect.js') }}"></script>
+	<script src="{{ url('angularjs2/libs/system.src.js') }}"></script>
+
+	<!-- 2. Configure SystemJS -->
+	<script src="{{ url('systemjs.config.js') }}"></script>
+	<script>
+		$(function () {
+			System.import('app').catch(function(err){ console.error(err); });
+		});
+	</script>
+
+{% endblock %}
+
 {% block content %}
 
-	<my-app>Loading...</my-app>
+	<my-app><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></my-app>
 
 {% endblock %}
