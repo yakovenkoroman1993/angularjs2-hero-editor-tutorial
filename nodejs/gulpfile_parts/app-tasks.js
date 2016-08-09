@@ -7,38 +7,38 @@ exports.init = function(gulp, pathes) {
     gulp.task('app-js', function () {
 
         return gulp
-            .src(pathes.app + '/**/*.js')
-            .pipe(gulp.dest(pathes.public_scheme.angular))
+            .src(pathes.app.root + '/**/*.js')
+            .pipe(gulp.dest(pathes.public.angular))
     });
 
     gulp.task('app-html', function () {
-
+        
         return gulp
-            .src(pathes.app + '/**/*.html')
-            .pipe(gulp.dest(pathes.public_scheme.angular_templates))
+            .src(pathes.app.templates + '/**/*.html')
+            .pipe(gulp.dest(pathes.public.angular_templates))
     });
 
     gulp.task('app-css', function () {
 
         return gulp
-            .src(pathes.app + '/**/*.css')
-            .pipe(gulp.dest(pathes.public_scheme.angular_styles))
+            .src(pathes.app.styles + '/**/*.css')
+            .pipe(gulp.dest(pathes.public.angular_styles))
     });
 
     return [{
         name: 'app-js',
         watch: [
-            pathes.app + '/**/*.js'
+            pathes.app.root + '/**/*.js'
         ]
     }, {
         name: 'app-html',
         watch: [
-            pathes.app + '/**/*.html'
+            pathes.app.templates + '/**/*.html'
         ]
     }, {
         name: 'app-css',
         watch: [
-            pathes.app + '/**/*.css'
+            pathes.app.styles + '/**/*.css'
         ]
     }];
 };

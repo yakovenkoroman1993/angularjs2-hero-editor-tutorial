@@ -13,28 +13,28 @@ exports.init = function(gulp, pathes) {
                 pathes.npm + '/reflect-metadata/Reflect.js',
                 pathes.npm + '/systemjs/dist/system.src.js'
             ])
-            .pipe(gulp.dest(pathes.public_scheme.angular + '/libs'))
+            .pipe(gulp.dest(pathes.public.angular + '/libs'))
     });
 
     gulp.task('@angular-dir', function () {
 
         return gulp
             .src(pathes.npm + '/@angular/**/*.js')
-            .pipe(gulp.dest(pathes.public_scheme.angular + '/libs/@angular'))
+            .pipe(gulp.dest(pathes.public.angular + '/libs/@angular'))
     });
 
     gulp.task('angular2-in-memory-web-api-dir', function () {
 
         return gulp
             .src(pathes.npm + '/angular2-in-memory-web-api/**/*.js')
-            .pipe(gulp.dest(pathes.public_scheme.angular + '/libs/angular2-in-memory-web-api'))
+            .pipe(gulp.dest(pathes.public.angular + '/libs/angular2-in-memory-web-api'))
     });
 
     gulp.task('rxjs-dir', function () {
 
         return gulp
             .src(pathes.npm + '/rxjs/**/*.js')
-            .pipe(gulp.dest(pathes.public_scheme.angular + '/libs/rxjs'))
+            .pipe(gulp.dest(pathes.public.angular + '/libs/rxjs'))
     });
 
     return [{

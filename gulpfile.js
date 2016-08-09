@@ -5,14 +5,33 @@ var gulp = require('gulp'),
     fs = require('fs');
 
 var pathes = {
-    app: 'app',
     npm: 'node_modules',
+    
     gulp_parts: './nodejs/gulpfile_parts',
 
-    public_scheme: {
+    app: {
+        root: 'app',
+        get components() {
+
+            return this.root + '/components';
+        },
+
+        get styles() {
+
+            return this.root + '/styles';
+        },
+
+        get templates() {
+
+            return this.root + '/templates';
+        }
+    },
+
+    public: {
         root: 'public',
 
         get angular() {
+
             return this.root + '/angularjs2'
         },
 

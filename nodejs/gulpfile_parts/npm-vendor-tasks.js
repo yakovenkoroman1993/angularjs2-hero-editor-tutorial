@@ -12,7 +12,7 @@ exports.init = function(gulp, pathes) {
                 pathes.npm + '/jquery.2/node_modules/jquery/dist/jquery.min.js',
                 pathes.npm + '/bootstrap/dist/js/bootstrap.min.js'
             ])
-            .pipe(gulp.dest(pathes.public_scheme.vendor_js))
+            .pipe(gulp.dest(pathes.public.vendor_js))
     });
 
     gulp.task('npm-vendor-css', function () {
@@ -23,14 +23,14 @@ exports.init = function(gulp, pathes) {
                 pathes.npm + '/bootstrap/dist/css/bootstrap.min.css',
                 pathes.npm + '/font-awesome/css/font-awesome.min.css'
             ])
-            .pipe(gulp.dest(pathes.public_scheme.vendor_css))
+            .pipe(gulp.dest(pathes.public.vendor_css))
     });
 
     gulp.task('font-awesome-fonts', function () {
 
         return gulp
             .src(pathes.npm + '/font-awesome/fonts/*.*')
-            .pipe(gulp.dest(pathes.public_scheme.root + '/styles/fonts'))
+            .pipe(gulp.dest(pathes.public.root + '/styles/fonts'))
     });
 
     return [{
