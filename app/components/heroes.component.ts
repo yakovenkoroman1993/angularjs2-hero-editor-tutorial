@@ -1,3 +1,6 @@
+/**
+ * Created by Roman on 09.08.2016.
+ */
 import {Component, OnInit} from '@angular/core';
 import {Config} from './../config';
 

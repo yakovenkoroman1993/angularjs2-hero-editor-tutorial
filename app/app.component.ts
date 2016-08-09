@@ -9,7 +9,10 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     selector: 'my-app',
     template: `
         <h1>{{ title }}</h1>
-        <a [routerLink]="['/heroes']">Heroes</a>
+        <nav>
+            <a [routerLink]="['/dashboard']" routerLinkActive="active">Dashboard</a>
+            <a [routerLink]="['/heroes']" routerLinkActive="active">Heroes</a>
+        </nav>
         <router-outlet></router-outlet>
     `,
     directives: [ROUTER_DIRECTIVES]
